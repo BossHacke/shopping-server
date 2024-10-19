@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
-import { MenuItem } from "src/menu_item/schemas/menu_item.entity";
+import { MenuItem } from "src/menu_item/schemas/menu_item.schema";
 
 export type MenuItemOptionDocument = HydratedDocument<MenuItemOption>;
 

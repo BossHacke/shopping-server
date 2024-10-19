@@ -11,6 +11,7 @@ import { MenuItemModule } from './menu_item/menu_item.module';
 import { MenuItemOptionModule } from './menu_item_option/menu_item_option.module';
 import { OrderDetailModule } from './order_detail/order_detail.module';
 import { OrderModule } from './order/order.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [UsersModule, ConfigModule.forRoot({
@@ -29,7 +30,8 @@ import { OrderModule } from './order/order.module';
     MenuItemModule,
     MenuItemOptionModule,
     OrderDetailModule,
-    OrderModule
+    OrderModule,
+    ReviewsModule
   ],
   controllers: [AppController],
   providers: [AppService],

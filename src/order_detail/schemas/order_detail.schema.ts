@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
-import { MenuItem } from "src/menu_item/schemas/menu_item.entity";
-import { MenuItemOption } from "src/menu_item_option/schemas/menu_item_option.entity";
-import { Menu } from "src/menus/schemas/menu.entity";
-import { Order } from "src/order/schemas/order.entity";
+import { MenuItem } from "src/menu_item/schemas/menu_item.schema";
+import { MenuItemOption } from "src/menu_item_option/schemas/menu_item_option.schema";
+import { Menu } from "src/menus/schemas/menu.schema";
+import { Order } from "src/order/schemas/order.schema";
 
 export type OrderDetailDocument = HydratedDocument<OrderDetail>;
 @Schema({ timestamps: true })

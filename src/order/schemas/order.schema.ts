@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
-import { Restaurant } from "src/restaurant/schemas/restaurant.entity";
-import { User } from "src/users/schemas/user.entity";
+import { Restaurant } from "src/restaurant/schemas/restaurant.schema";
+import { User } from "src/users/schemas/user.schema";
 
 export type OrderDocument = HydratedDocument<Order>;
 @Schema({ timestamps: true })
