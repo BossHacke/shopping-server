@@ -12,11 +12,21 @@ import { MenuItemOptionModule } from './menu_item_option/menu_item_option.module
 import { OrderDetailModule } from './order_detail/order_detail.module';
 import { OrderModule } from './order/order.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
+
+console.log('Đường dẫn thư mục client:', join(__dirname, '..', 'client/index.html'));
 
 @Module({
-  imports: [UsersModule, ConfigModule.forRoot({
-    isGlobal: true,
-  }),
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/(.*)'],
+    }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -24,6 +34,7 @@ import { ReviewsModule } from './reviews/reviews.module';
       }),
       inject: [ConfigService],
     }),
+    UsersModule,
     LikesModule,
     RestaurantModule,
     MenusModule,
@@ -36,4 +47,5 @@ import { ReviewsModule } from './reviews/reviews.module';
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule { }
