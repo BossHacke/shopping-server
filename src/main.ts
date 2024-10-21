@@ -13,7 +13,6 @@ async function bootstrap() {
   const port = configService.get('PORT');
   app.setGlobalPrefix('api', { exclude: [''] });
   app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
     forbidNonWhitelisted: true,
   }));
 

@@ -15,9 +15,6 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
-
-console.log('Đường dẫn thư mục client:', join(__dirname, '..', 'client/index.html'));
-
 @Module({
   imports: [
     ConfigModule.forRoot({
