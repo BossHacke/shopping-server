@@ -14,6 +14,7 @@ import { OrderModule } from './order/order.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -39,7 +40,8 @@ import { join } from 'path';
     MenuItemOptionModule,
     OrderDetailModule,
     OrderModule,
-    ReviewsModule
+    ReviewsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

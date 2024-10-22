@@ -6,6 +6,7 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { hashPasswordHelper } from 'src/helpers/util';
 import aqp from 'api-query-params';
+import mongoose from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -62,19 +63,33 @@ export class UsersService {
       .limit(pageSize)
       .skip(skip)
       .select('-password')
-      .sort(sort as any)
+      .sort(sort as any);
+
     return { results, totalPages };
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return `This action returns a user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findByEmail(email: string) {
+    return await this.user.findOne({ email });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async update(updateUserDto: UpdateUserDto) {
+    const updateUser = await this.user.updateOne(
+      { _id: updateUserDto._id },
+      { ...updateUserDto },
+    );
+    return updateUser;
+  }
+
+  async remove(_id: string) {
+    if (mongoose.isValidObjectId(_id)) {
+      return await this.user.deleteOne({ _id });
+    }
+    else {
+      throw new BadRequestException('id không đúng định dạng mongodb');
+    }
   }
 }
