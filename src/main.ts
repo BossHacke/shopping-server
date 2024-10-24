@@ -17,6 +17,7 @@ async function bootstrap() {
   }));
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Shopping Web')
     .setDescription('Shopping Api description')
     .setVersion('1.0')
