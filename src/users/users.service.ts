@@ -112,7 +112,6 @@ export class UsersService {
       codeId: uuidv4(),
       codeExpired: dayjs().add(1, 'minutes'),
     })
-
     //trả phản hồi
 
     //send email
