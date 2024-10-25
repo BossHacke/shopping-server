@@ -4,6 +4,7 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { LocalAuthGuard } from './passport/local-auth.guard';
 import { JwtAuthGuard } from './passport/jwt-auth.guard';
+import { Public } from './decorator/customize';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -16,6 +17,7 @@ export class AuthController {
   }
 
   @UseGuards(LocalAuthGuard)
+  @Public()
   @Post('login')
   handleLogin(@Request() req) {
     return this.authService.login(req.user);
@@ -25,5 +27,11 @@ export class AuthController {
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Post('register')
+  @Public()
+  register(@Body() dto: CreateAuthDto) {
+    return this.authService.handleRegister(dto);
   }
 }
