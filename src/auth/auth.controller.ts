@@ -44,10 +44,14 @@ export class AuthController {
   sendEmail() {
     this.mailerService
     .sendMail({
-      to: 'sayhi27112004@gmail.com',
+      to: 'vonguyenphihung123@gmail.com',
       subject: 'Test mail',
       text: 'welcome',
-      html: '<b>Phi Hùng Iuuu Thảo Hiền</b>'
+      template: "register.hbs",
+      context: {
+        name: "Hùng",
+        activationCode: 123456
+      }
     })
       return 'success';
   }

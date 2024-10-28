@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 import { CreateAuthDto } from 'src/auth/dto/create-auth.dto';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class UsersService {
@@ -17,6 +18,7 @@ export class UsersService {
   constructor(
     @InjectModel(User.name)
     private user: Model<User>,
+    private readonly mailerService: MailerService
   ) { }
 
   //check mail khi đã đăng ký
@@ -98,6 +100,7 @@ export class UsersService {
 
   async handleRegister(registerDto: CreateAuthDto) {
     const { name, email, password } = registerDto;
+    const codeId = uuidv4();
     //mai làm check mail người dùng khi tạo tài khoản
     const isExist = await this.isEmailExist(email);
     if (isExist) {
@@ -109,13 +112,20 @@ export class UsersService {
       email,
       password: hashPassword,
       isActive: false,
-      codeId: uuidv4(),
+      codeId: codeId,
       codeExpired: dayjs().add(1, 'minutes'),
     })
-    //trả phản hồi
-
     //send email
-
+    this.mailerService.sendMail({
+      to: userDto.email,
+      subject: "Activate your account at @vonguyenphihung",
+      template: "register.hbs",
+      context: {
+        name: userDto?.name ?? userDto.email,
+        activationCode: codeId
+      }
+    })
+    //trả ra phản hồi
     return {
       _id: userDto._id
     };

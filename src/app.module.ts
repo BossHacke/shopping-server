@@ -55,13 +55,13 @@ import { strict } from 'assert';
           from: '"No Replay" <no-reply@localhost>',
         },
         // preview: true,
-        // template: {
-        //   dir: process.cwd() + '/template/',
-        //   adapter: new HandlebarsAdapter(),
-        //   options: {
-        //     strict: true,
-        //   }
-        // }
+        template: {
+          dir: process.cwd() + '/src/mail/templates/',
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          }
+        }
       }),
       inject: [ConfigService],
     }),
